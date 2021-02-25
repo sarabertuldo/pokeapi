@@ -20,14 +20,10 @@ import Example from "./components/Example";
 
 function App() {
   return (
-    <PokeProvider>
-      {/* <Provider store={store}> */}
+    <Provider store={store}>
       <Router>
         <>
           <nav className="navbar">
-            {/* <NavLink className="link" to="/Example">
-              Example
-            </NavLink> */}
             <NavLink className="link" to="/Login">
               Login
             </NavLink>
@@ -62,9 +58,7 @@ function App() {
           <footer className="f-text">sara's pokemon api</footer>
         </>
       </Router>
-
-      {/* </Provider> */}
-    </PokeProvider>
+    </Provider>
   );
 }
 

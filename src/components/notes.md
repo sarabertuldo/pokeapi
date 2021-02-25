@@ -93,3 +93,9 @@ Version
 32. Let's Go, Eevee
 33. Sword
 34. Shield
+
+## Things to Fix
+
+- need to have some sort of animation?
+- sort out errors for invalid names on search function
+- toLowerCase() for search

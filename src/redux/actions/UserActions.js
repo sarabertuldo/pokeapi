@@ -8,8 +8,3 @@ export function setUser(user) {
 export function clearUser() {
   return { type: CLEAR_USER };
 }
-
-// avoid
-// export const LOGIN = "Login"
-// export const LOGOUT = "Logout"
-// because you want to clarify what the action is doing with state
