@@ -13,12 +13,15 @@ import { NavLink } from "react-router-dom";
 import { SET_USER, ADD_FAVORITE, DELETE_FAVORITE } from "./redux/actions";
 import LoginPage from "./components/LoginPage";
 import store from "./redux/Store";
+import PokeProvider from "./shared/PokeContext";
+import Axios from "axios";
 import { Provider } from "react-redux";
 import Example from "./components/Example";
 
 function App() {
   return (
-    <Provider store={store}>
+    <PokeProvider>
+      {/* <Provider store={store}> */}
       <Router>
         <>
           <nav className="navbar">
@@ -59,7 +62,9 @@ function App() {
           <footer className="f-text">sara's pokemon api</footer>
         </>
       </Router>
-    </Provider>
+
+      {/* </Provider> */}
+    </PokeProvider>
   );
 }
 
