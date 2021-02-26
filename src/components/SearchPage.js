@@ -21,13 +21,11 @@ function SearchPage(props) {
       setError("");
       let response = await fetch(`${url}pokemon/${name}`);
       let json = await response.json();
-
       let resPkmn = {
         id: json.id,
         name: json.name,
         img: json.sprites.front_default,
       };
-      console.log(resPkmn);
       props.setQuery(resPkmn);
     } catch (e) {
       setError("Invalid name");
@@ -36,9 +34,20 @@ function SearchPage(props) {
   }
 
   async function getByType(type) {
-    let response = await fetch(`${url}type/${type}`);
-    let json = await response.json();
-    console.log(json);
+    try {
+      setError("");
+      let response = await fetch(`${url}type/${type}`);
+      let json = await response.json();
+      // console.log(json);
+      let resTypes = json.pokemon.map((pokemon) => {
+        return { pokemon: pokemon.pokemon.name };
+      });
+      console.log(resTypes);
+      props.setQuery(resTypes);
+    } catch (e) {
+      setError("Invalid type");
+      props.setQuery([]);
+    }
   }
 
   async function getByGame(game) {
@@ -80,31 +89,17 @@ function SearchPage(props) {
       </div>
 
       <div>
-        <select
+        <input
           id="type"
           type="text"
-          onChange={(e) => getByType(e.target.value)}
+          onChange={(e) => setType(e.target.value)}
+          placeholder="Search By Type"
           value={type}
-        >
-          <option value="normal">Normal</option>
-          <option value="fighting">Fighting</option>
-          <option value="flying">Flying</option>
-          <option value="poison">Poison</option>
-          <option value="ground">Ground</option>
-          <option value="rock">Rock</option>
-          <option value="bug">Bug</option>
-          <option value="ghost">Ghost</option>
-          <option value="steel">Steel</option>
-          <option value="fire">Fire</option>
-          <option value="water">Water</option>
-          <option value="grass">Grass</option>
-          <option value="electric">Electric</option>
-          <option value="psychic">Psychic</option>
-          <option value="ice">Ice</option>
-          <option value="dragon">Dragon</option>
-          <option value="dark">Dark</option>
-          <option value="fairy">Fairy</option>
-        </select>
+        />
+        <button className="button" onClick={() => getByType(type)}>
+          Search Type
+        </button>
+        <p className="text-example">(Example: Water, Flying, Psychic, etc.)</p>
       </div>
 
       <label htmlFor="limit">Limit</label>

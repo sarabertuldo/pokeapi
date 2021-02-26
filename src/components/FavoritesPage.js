@@ -4,7 +4,7 @@ import React from "react";
 function FavoritesPage() {
   return (
     <>
-      <h1>Favorites</h1>
+      <h1>Caught</h1>
       {/* selected pokemon will be added here */}
     </>
   );

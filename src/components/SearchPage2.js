@@ -4,58 +4,49 @@
 // import { PokeContext } from "../shared/PokeContext";
 // import { setQuery } from "../redux/actions/QueryActions";
 // import { connect } from "react-redux";
-// import store from "../redux/Store";
 
 // function SearchPage(props) {
 //   const [name, setName] = useState("");
-//   const [type, setType] = useState("");
+//   const [type, setType] = useState("normal");
 //   const [game, setGame] = useState("");
-//   const [dex, setDex] = useState("");
-//   const [pic, setPic] = useState("");
-//   const [pkmn, setPkmn] = useState("");
 //   const [error, setError] = useState("");
 //   const [limit, setLimit] = useState(25);
 
-//   const poke = useContext(PokeContext);
+//   const pkmn = useContext(PokeContext);
 
 //   const url = `https://pokeapi.co/api/v2/`;
 
-// useEffect(() => {
 //   async function getByName(name) {
-//     let response = await fetch(`${url}pokemon/${name}`);
-//     let json = await response.json();
 //     try {
 //       setError("");
-//       setPkmn({
-//         name: name,
-//         species: response.data.species.name,
-//         img: response.formData.sprites.front_default,
-//         type: response.types[0].type.name,
-//       });
-//       console.log(json);
-//       return { json };
+//       let response = await fetch(`${url}pokemon/${name}`);
+//       let json = await response.json();
+
+//       let resPkmn = {
+//         id: json.id,
+//         name: json.name,
+//         img: json.sprites.front_default,
+//       };
+//       props.setQuery(resPkmn);
 //     } catch (e) {
 //       setError("Invalid name");
-//       pkmn.setSearch([]);
+//       props.setQuery([]);
 //     }
-//     setPkmn([]);
 //   }
 
-//   // async function getByType(type) {
-//   //   let response = await fetch(`${url}type/`);
-//   //   let json = await response.json();
-//   // }
+//   async function getByType(type) {
+//     let response = await fetch(`${url}type/${type}`);
+//     let json = await response.json();
 
-//   // async function getByGame(game) {
-//   //   let response = await fetch(`${url}generation/`);
-//   //   let json = await response.json();
-//   // }
+//     let resTypes = { id: json.id, name: json.name };
+//     console.log(json);
+//   }
 
-//   // this will return a photo for the pokemon searched for
-//   // function getPic () {
-//   // let param = name.value;
-//   // let response = await fetch(`${url}pokemon/` + {param});
-//   // }
+//   async function getByGame(game) {
+//     let response = await fetch(`${url}generation/${game}`);
+//     let json = await response.json();
+//     console.log(json);
+//   }
 
 //   return (
 //     <>
@@ -71,7 +62,9 @@
 //         <button className="button" onClick={() => getByName(name)}>
 //           Search Name
 //         </button>
-//         <h5>(Example: Pikachu, Jigglypuff, Greninja, etc.)</h5>
+//         <p className="text-example">
+//           (Example: Pikachu, Jigglypuff, Greninja, etc.
+//         </p>
 //       </div>
 
 //       <div>
@@ -91,8 +84,7 @@
 //         <select
 //           id="type"
 //           type="text"
-//           onChange={(e) => setType(e.target.value)}
-//           placeholder="Search By Type"
+//           onChange={(e) => getByType(e.target.value)}
 //           value={type}
 //         >
 //           <option value="normal">Normal</option>
@@ -126,9 +118,15 @@
 //         <option value="25">25</option>
 //         <option value="50">50</option>
 //       </select>
-//       <div>{pkmn.name}</div>
 //       <div>
-//         <DisplayPage />
+//         {error.length > 0 && <h1>{error}</h1>}
+//         {error.length === 0 && props.pkmn.name && (
+//           <DisplayPage
+//             name={props.pkmn.name}
+//             id={props.pkmn.id}
+//             img={props.pkmn.img}
+//           />
+//         )}
 //       </div>
 //     </>
 //   );
@@ -145,8 +143,7 @@
 // function mapStateToProps(state) {
 //   return {
 //     globalState: state,
-//     poke: state.search,
-
+//     pkmn: state.query,
 //     favorites: state.favorites,
 //   };
 // }
