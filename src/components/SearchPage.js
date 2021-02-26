@@ -4,50 +4,48 @@ import DisplayPage from "./DisplayPage";
 import { PokeContext } from "../shared/PokeContext";
 import { setQuery } from "../redux/actions/QueryActions";
 import { connect } from "react-redux";
-import store from "../redux/Store";
 
 function SearchPage(props) {
   const [name, setName] = useState("");
   const [type, setType] = useState("");
   const [game, setGame] = useState("");
-  const [dex, setDex] = useState("");
-  const [pic, setPic] = useState("");
-  const [pkmn, setPkmn] = useState("");
   const [error, setError] = useState("");
   const [limit, setLimit] = useState(25);
 
-  const poke = useContext(PokeContext);
+  const pkmn = useContext(PokeContext);
 
   const url = `https://pokeapi.co/api/v2/`;
 
   async function getByName(name) {
-    let response = await fetch(`${url}pokemon/${name}`);
-    let json = await response.json();
     try {
       setError("");
-      console.log(json);
-      return { json };
+      let response = await fetch(`${url}pokemon/${name}`);
+      let json = await response.json();
+
+      let resPkmn = {
+        id: json.id,
+        name: json.name,
+        img: json.sprites.front_default,
+      };
+      console.log(resPkmn);
+      props.setQuery(resPkmn);
     } catch (e) {
       setError("Invalid name");
-      props.setSearch([]);
+      props.setQuery([]);
     }
   }
 
   async function getByType(type) {
-    let response = await fetch(`${url}type/`);
+    let response = await fetch(`${url}type/${type}`);
     let json = await response.json();
+    console.log(json);
   }
 
   async function getByGame(game) {
-    let response = await fetch(`${url}generation/`);
+    let response = await fetch(`${url}generation/${game}`);
     let json = await response.json();
+    console.log(json);
   }
-
-  // this will return a photo for the pokemon searched for
-  // function getPic () {
-  // let param = name.value;
-  // let response = await fetch(`${url}pokemon/` + {param});
-  // }
 
   return (
     <>
@@ -63,7 +61,9 @@ function SearchPage(props) {
         <button className="button" onClick={() => getByName(name)}>
           Search Name
         </button>
-        <p>(Example: Pikachu, Jigglypuff, Greninja, etc.</p>
+        <p className="text-example">
+          (Example: Pikachu, Jigglypuff, Greninja, etc.
+        </p>
       </div>
 
       <div>
@@ -83,8 +83,7 @@ function SearchPage(props) {
         <select
           id="type"
           type="text"
-          onChange={(e) => setType(e.target.value)}
-          placeholder="Search By Type"
+          onChange={(e) => getByType(e.target.value)}
           value={type}
         >
           <option value="normal">Normal</option>
@@ -119,7 +118,14 @@ function SearchPage(props) {
         <option value="50">50</option>
       </select>
       <div>
-        <DisplayPage />
+        {error.length > 0 && <h1>{error}</h1>}
+        {error.length === 0 && props.pkmn.name && (
+          <DisplayPage
+            name={props.pkmn.name}
+            id={props.pkmn.id}
+            img={props.pkmn.img}
+          />
+        )}
       </div>
     </>
   );
@@ -136,8 +142,7 @@ const mapDispatchToProps = {
 function mapStateToProps(state) {
   return {
     globalState: state,
-    poke: state.search,
-
+    pkmn: state.query,
     favorites: state.favorites,
   };
 }

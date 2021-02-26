@@ -16,10 +16,10 @@ const initialState = [
 export const PokeContext = React.createContext(null);
 
 const PokeProvider = (props) => {
-  const poke = useArray(initialState);
+  const pkmn = useArray(initialState);
   return (
     // props.children will have access to Provider
-    <PokeContext.Provider value={poke}>{props.children}</PokeContext.Provider>
+    <PokeContext.Provider value={pkmn}>{props.children}</PokeContext.Provider>
   );
 };
 
