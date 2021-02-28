@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 
 function SearchPage(props) {
   const [name, setName] = useState("");
-  const [type, setType] = useState("");
+  const [type, setType] = useState([]);
   const [game, setGame] = useState("");
   const [error, setError] = useState("");
   const [limit, setLimit] = useState(25);
@@ -44,21 +44,16 @@ function SearchPage(props) {
       let response = await fetch(`${url}type/${type}`);
       let json = await response.json();
       // console.log(json);
-      let resTypes = json.pokemon.map((pokemon) => {
+      let resPokeTypes = json.pokemon.map((pokemon) => {
         return { pokemon: pokemon.pokemon.name };
       });
-      console.log(resTypes);
-      props.setTypes(resTypes);
+      // let ptype = json.pokemon[0].pokemon.name;
+      console.log(resPokeTypes);
+      props.setTypes(resPokeTypes);
     } catch (e) {
       setError("Invalid type");
       props.setTypes([]);
     }
-  }
-
-  async function getByGame(game) {
-    let response = await fetch(`${url}generation/${game}`);
-    let json = await response.json();
-    console.log(json);
   }
 
   return (
@@ -82,19 +77,6 @@ function SearchPage(props) {
 
       <div>
         <input
-          id="game"
-          type="text"
-          onChange={(e) => setGame(e.target.value)}
-          placeholder="Search By Game"
-          value={game}
-        />
-        <button className="button" onClick={(e) => getByGame(e.target.value)}>
-          Search Game
-        </button>
-      </div>
-
-      <div>
-        <input
           id="type"
           type="text"
           onChange={(e) => setType(e.target.value)}
@@ -107,24 +89,15 @@ function SearchPage(props) {
         <p className="text-example">(Example: Water, Flying, Psychic, etc.)</p>
       </div>
 
-      <label htmlFor="limit">Limit</label>
-      <select
-        id="limit"
-        value={limit}
-        onChange={(e) => setLimit(e.target.value)}
-      >
-        <option value="10">10</option>
-        <option value="25">25</option>
-        <option value="50">50</option>
-      </select>
       <div>
         {error.length > 0 && <h1>{error}</h1>}
-        {error.length === 0 && props.pkmn.name && (
+        {error.length === 0 && props.pkmn.name && props.pkmn.type && (
           <DisplayPage
             name={props.pkmn.name}
             id={props.pkmn.id}
             img={props.pkmn.img}
             type={props.pkmn.type}
+            // ptype={props.ptype.name}
           />
         )}
       </div>

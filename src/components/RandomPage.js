@@ -27,17 +27,33 @@ function RandomPage() {
   return (
     <>
       <h1>Random</h1>
-
-      <h3>{randomPkmn.name}</h3>
-      <section>
+      <div className="random-box">
+        <h3>{randomPkmn.name}</h3>
+        <h4>#{randomPkmn.id}</h4>
         <img
           src={
-            `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/` +
+            `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/` +
             randomPkmn.id +
             `.png`
           }
         />
-      </section>
+        <div>
+          <img
+            src={
+              `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/` +
+              +randomPkmn.id +
+              `.png`
+            }
+          />
+          <img
+            src={
+              `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/` +
+              +randomPkmn.id +
+              `.png`
+            }
+          />
+        </div>
+      </div>
     </>
   );
 }

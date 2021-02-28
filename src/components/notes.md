@@ -1,3 +1,19 @@
+# Personal React Project
+
+This application should allow for you to display your React skills learned so far. Unlike the other projects we have been doing, this will be used to display both your creativity AND your talent. As a whole, the content is not as important as the functionality. Use this to flex your muscles and work on something you are passionate about. The more passionate you are about something you code, the better you can talk about it. All of that in mind, the project should have at least the following:
+
+- Utilize some form of API call(s). What you do with said calls is only important to the application you're making.
+- Utilize form control (in whatever way you prefer) on a form with at least 4 inputs.
+- Utilize routing including some from of AuthGuard(s).
+- Utilize State Management in some form. Whether it is `useState`, `Redux`, `Context`, or any other option
+- Utilize some form an animation. This can be one you have already done but make sure you use some form of one.
+- All of your styling should be done with SASS (or some form of styling library / framework).
+- Follow best practices for separation of files and folder structure.
+- Challenge yourself.
+- Utilize GitHub with branches and commits using best practice.
+
+Not only will you be making this during the next few days but you will also be showing the class and discussing your coding / styling / etc choices.
+
 ## Pokemon API
 
 http://pokeapi.co
