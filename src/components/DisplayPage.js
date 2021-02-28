@@ -7,10 +7,10 @@ function DisplayPage(props, pkmn) {
     <>
       <h1>Results</h1>
       <div className="box">
-        <div>Pokedex No. {props.id}</div>
-        <h4>{props.name}</h4>
+        <h3>{props.name}</h3>
+        <div className="pokedex-box">Pokedex No. {props.id}</div>
         <img src={props.img} />
-        <div>{props.type}</div>
+        <div className="type-box">{props.type}</div>
       </div>
     </>
   );

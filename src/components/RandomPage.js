@@ -28,7 +28,7 @@ function RandomPage() {
     <>
       <h1>Random</h1>
 
-      <h4>{randomPkmn.name}</h4>
+      <h3>{randomPkmn.name}</h3>
       <section>
         <img
           src={

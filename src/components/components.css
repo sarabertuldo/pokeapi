@@ -16,7 +16,7 @@ button {
   margin-left: 5px;
 }
 
-h4 {
+h3 {
   text-transform: uppercase;
   margin-left: 5px;
 }
@@ -24,9 +24,22 @@ h4 {
 .box {
   border: solid 8px gold;
   border-radius: 5px;
-  width: 150px;
+  width: 140px;
   padding: 5px;
   text-align: center;
   margin-bottom: 10px;
   background-color: orange;
+}
+
+.type-box {
+  background-color: black;
+  color: white;
+  width: 75px;
+  margin: auto;
+  border-radius: 8px;
+  padding: 3px;
+}
+
+.pokedex-box {
+  font-size: 12px;
 }
