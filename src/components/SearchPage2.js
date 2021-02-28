@@ -84,6 +84,7 @@
 //         <select
 //           id="type"
 //           type="text"
+//           // setType
 //           onChange={(e) => getByType(e.target.value)}
 //           value={type}
 //         >

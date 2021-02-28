@@ -3,6 +3,7 @@ import "./components.css";
 import DisplayPage from "./DisplayPage";
 import { PokeContext } from "../shared/PokeContext";
 import { setQuery } from "../redux/actions/QueryActions";
+import { setTypes } from "../redux/actions/TypesActions";
 import { connect } from "react-redux";
 
 function SearchPage(props) {
@@ -19,13 +20,17 @@ function SearchPage(props) {
   async function getByName(name) {
     try {
       setError("");
-      let response = await fetch(`${url}pokemon/${name}`);
+      let nameLC = name.toLowerCase();
+      let response = await fetch(`${url}pokemon/${nameLC}`);
       let json = await response.json();
+
       let resPkmn = {
         id: json.id,
         name: json.name,
         img: json.sprites.front_default,
+        type: json.types[0].type.name,
       };
+      // let type = resPkmn.json.types.map((type) => type.type.name);
       props.setQuery(resPkmn);
     } catch (e) {
       setError("Invalid name");
@@ -43,10 +48,10 @@ function SearchPage(props) {
         return { pokemon: pokemon.pokemon.name };
       });
       console.log(resTypes);
-      props.setQuery(resTypes);
+      props.setTypes(resTypes);
     } catch (e) {
       setError("Invalid type");
-      props.setQuery([]);
+      props.setTypes([]);
     }
   }
 
@@ -119,6 +124,7 @@ function SearchPage(props) {
             name={props.pkmn.name}
             id={props.pkmn.id}
             img={props.pkmn.img}
+            type={props.pkmn.type}
           />
         )}
       </div>
@@ -126,12 +132,15 @@ function SearchPage(props) {
   );
 }
 
-// {pokemonInfo && <div>Name: pokemonInfo.name</div>
-// <div>PokeDex #: pokemonInfo.id</div>}
-// <div>official-artwork</div>
+{
+  /* {pokemonInfo && <div>Name: pokemonInfo.name</div>
+<div>PokeDex #: pokemonInfo.id</div>}
+<div>official-artwork</div> */
+}
 
 const mapDispatchToProps = {
   setQuery,
+  setTypes,
 };
 
 function mapStateToProps(state) {
