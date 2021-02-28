@@ -16,7 +16,7 @@ import store from "./redux/Store";
 import PokeProvider from "./shared/PokeContext";
 import Axios from "axios";
 import { Provider } from "react-redux";
-import Example from "./components/Example";
+import TextScroller from "./components/TextScroller";
 
 function App() {
   return (
@@ -55,7 +55,10 @@ function App() {
               </Switch>
             </div>
           </main>
-          <footer className="f-text">sara's pokemon api</footer>
+          <footer className="f-text">
+            sara's pokemon api
+            <TextScroller text="gotta catch 'em all!" />
+          </footer>
         </>
       </Router>
     </Provider>

@@ -11,6 +11,9 @@ function DisplayPage(props, pkmn) {
         <div className="pokedex-box">Pokedex No. {props.id}</div>
         <img src={props.img} />
         <div className="type-box">{props.type}</div>
+        <div class="wrapper">
+          <span class="marquee">This is a marquee!</span>
+        </div>
       </div>
     </>
   );
