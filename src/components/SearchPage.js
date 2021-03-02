@@ -1,17 +1,18 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./components.css";
 import DisplayPage from "./DisplayPage";
+import DisplayTypes from "./DisplayTypes";
 import { PokeContext } from "../shared/PokeContext";
 import { setQuery } from "../redux/actions/QueryActions";
 import { setTypes } from "../redux/actions/TypesActions";
 import { connect } from "react-redux";
+import axios from "axios";
 
 function SearchPage(props) {
   const [name, setName] = useState("");
   const [type, setType] = useState([]);
-  const [game, setGame] = useState("");
   const [error, setError] = useState("");
-  const [limit, setLimit] = useState(25);
+  const [pokemon, setPokemon] = useState([]);
 
   const pkmn = useContext(PokeContext);
 
@@ -101,6 +102,15 @@ function SearchPage(props) {
           />
         )}
       </div>
+      {/* <div>
+        {pokemon.types.map((type) => {
+          return (
+            <div>
+              <DisplayTypes>{type.DisplayTypes.name}</DisplayTypes>
+            </div>
+          );
+        })}
+      </div> */}
     </>
   );
 }

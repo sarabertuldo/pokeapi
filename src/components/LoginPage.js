@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./components.css";
 import { useHistory } from "react-router-dom";
+import { connect } from "react-redux";
+import { setUser } from "../redux/actions";
 
 const LoginPage = (props) => {
   const history = useHistory();
@@ -9,6 +11,7 @@ const LoginPage = (props) => {
   function login() {
     console.log(username, password);
     if (username.length > 3 && password.length > 3) {
+      props.setUser(username);
       history.push("/search");
     }
   }
@@ -42,4 +45,12 @@ const LoginPage = (props) => {
   );
 };
 
-export default LoginPage;
+const mapDispatchToProps = {
+  setUser,
+};
+
+function mapStateToProps(state) {
+  return {};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

@@ -1,7 +1,7 @@
 import "./components.css";
 import React from "react";
 
-function FavoritesPage() {
+function CatchPage() {
   return (
     <>
       <h1>Caught</h1>
@@ -10,4 +10,4 @@ function FavoritesPage() {
   );
 }
 
-export default FavoritesPage;
+export default CatchPage;

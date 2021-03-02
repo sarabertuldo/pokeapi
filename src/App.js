@@ -1,6 +1,6 @@
 import "./App.css";
 import SearchPage from "./components/SearchPage";
-import FavoritesPage from "./components/FavoritesPage";
+import CatchPage from "./components/CatchPage";
 import RandomPage from "./components/RandomPage";
 import LinksPage from "./components/LinksPage";
 import {
@@ -10,7 +10,6 @@ import {
   BrowserRouter as Router,
 } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-import { SET_USER, ADD_FAVORITE, DELETE_FAVORITE } from "./redux/actions";
 import LoginPage from "./components/LoginPage";
 import store from "./redux/Store";
 import PokeProvider from "./shared/PokeContext";
@@ -30,8 +29,8 @@ function App() {
             <NavLink className="link" to="/Search">
               Search
             </NavLink>
-            <NavLink className="link" to="/Favorites">
-              Favorites
+            <NavLink className="link" to="/Catch">
+              Box
             </NavLink>
             <NavLink className="link" to="/Random">
               Random
@@ -46,7 +45,7 @@ function App() {
                 {/* <Route path="/example" component={Example} /> */}
                 <Route path="/login" component={LoginPage} />
                 <Route path="/search" component={SearchPage} />
-                <Route path="/favorites" component={FavoritesPage} />
+                <Route path="/catch" component={CatchPage} />
                 <Route path="/random" component={RandomPage} />
                 <Route path="/links" component={LinksPage} />
                 <Route path="*">
