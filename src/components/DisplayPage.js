@@ -10,7 +10,7 @@ const DisplayPage = ({ pkmn, isCaught, addCatch, deleteCatch }) => {
       <div className="box">
         <h3>{pkmn.name}</h3>
         <div className="pokedex-box">Pokedex No. {pkmn.id}</div>
-        <img src={pkmn.scuba} />
+        <img src={pkmn.img} />
         <div className="type-box">
           {pkmn.type}
           {/* {props.typetwo} */}

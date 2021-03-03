@@ -12,7 +12,6 @@ function SearchPage(props) {
   const [name, setName] = useState("");
   const [type, setType] = useState([]);
   const [error, setError] = useState("");
-  const [pokemon, setPokemon] = useState([]);
   const [caught, setCaught] = useState([]);
 
   // const pkmn = useContext(PokeContext);
@@ -103,7 +102,7 @@ function SearchPage(props) {
           <DisplayPage
             pkmn={props.pkmn}
             id={props.pkmn.id}
-            scuba={props.pkmn.img}
+            img={props.pkmn.img}
             type={props.pkmn.type}
             isCaught={caught.includes(props.pkmn.id)}
             // typetwo={props.pkmn.typetwo}
