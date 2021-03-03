@@ -5,9 +5,8 @@ function DisplayTypes(props) {
   console.log(props);
   return (
     <>
-      <h1>List Results</h1>
       <div>
-        <h3>{props.names}</h3>
+        <h3>{props.pkmn.name}</h3>
       </div>
     </>
   );

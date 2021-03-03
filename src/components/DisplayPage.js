@@ -26,4 +26,18 @@ const DisplayPage = ({ pkmn, isCaught, addCatch, deleteCatch }) => {
   );
 };
 
-export default DisplayPage;
+const mapDispatchToProps = {
+  addCatch,
+  deleteCatch,
+};
+
+function mapStateToProps(state) {
+  return {
+    globalState: state,
+    pkmn: state.query,
+    types: state.types,
+    caught: state.caught,
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DisplayPage);
