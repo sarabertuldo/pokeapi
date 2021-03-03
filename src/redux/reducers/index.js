@@ -8,6 +8,7 @@ const rootReducer = combineReducers({
   query: queryReducer,
   user: userReducer,
   caught: catchReducer,
+  types: typesReducer,
 });
 
 export default rootReducer;

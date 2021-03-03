@@ -13,8 +13,14 @@ function SearchPage(props) {
   const [type, setType] = useState([]);
   const [error, setError] = useState("");
   const [pokemon, setPokemon] = useState([]);
+  const [caught, setCaught] = useState([]);
 
-  const pkmn = useContext(PokeContext);
+  // const pkmn = useContext(PokeContext);
+
+  useEffect(() => {
+    let ids = props.caught.map((pkmn) => pkmn.id);
+    setCaught(ids);
+  }, [props.caught]);
 
   const url = `https://pokeapi.co/api/v2/`;
 
@@ -30,6 +36,7 @@ function SearchPage(props) {
         name: json.name,
         img: json.sprites.front_default,
         type: json.types[0].type.name,
+        // typetwo: json.types[1].type.name,
       };
       // let type = resPkmn.json.types.map((type) => type.type.name);
       props.setQuery(resPkmn);
@@ -46,7 +53,7 @@ function SearchPage(props) {
       let json = await response.json();
       // console.log(json);
       let resPokeTypes = json.pokemon.map((pokemon) => {
-        return { pokemon: pokemon.pokemon.name };
+        return { name: pokemon.pokemon.name };
       });
       // let ptype = json.pokemon[0].pokemon.name;
       console.log(resPokeTypes);
@@ -92,25 +99,27 @@ function SearchPage(props) {
 
       <div>
         {error.length > 0 && <h1>{error}</h1>}
-        {error.length === 0 && props.pkmn.name && props.pkmn.type && (
+        {error.length === 0 && (
           <DisplayPage
-            name={props.pkmn.name}
+            pkmn={props.pkmn}
             id={props.pkmn.id}
-            img={props.pkmn.img}
+            scuba={props.pkmn.img}
             type={props.pkmn.type}
+            isCaught={caught.includes(props.pkmn.id)}
+            // typetwo={props.pkmn.typetwo}
             // ptype={props.ptype.name}
           />
         )}
       </div>
-      {/* <div>
-        {pokemon.types.map((type) => {
+      <div>
+        {props.types.map((t) => {
           return (
             <div>
-              <DisplayTypes>{type.DisplayTypes.name}</DisplayTypes>
+              <DisplayTypes pkmn={t}></DisplayTypes>
             </div>
           );
         })}
-      </div> */}
+      </div>
     </>
   );
 }
@@ -130,7 +139,8 @@ function mapStateToProps(state) {
   return {
     globalState: state,
     pkmn: state.query,
-    favorites: state.favorites,
+    types: state.types,
+    caught: state.caught,
   };
 }
 

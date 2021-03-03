@@ -115,6 +115,15 @@ Version
 - need to have some sort of animation?
 - sort out errors for invalid names on search function
 - toLowerCase() for search
+- switch favorites to "catch" function
+
+## Questions
+
+- I am still unable to return data from the API with the "search by type" function and have it display on the page. I want it to display the names and pictures of all the Pokemon associated with that type. Shows up in the console as an array. Unpacking it is a little weird. How do I map through it?
+
+- I am confused to the naming of props. In SearchPage, it's {props.pkmn.name} and on DisplayPage, it's {props.name}... (On Search Page, I changed DisplayPage img={...} to scuba={...} and then <img src={props.scuba}> on DisplayPage)
+
+- I have only been able to get one type to show up. Some Pokemon are listed as one more than time (Torterra - grass, ground or Charizard - fire, flying) If I do a json.types[1].type.name, it will list the other type, but when I search for a Pokemon that only has one type it will return an invalid name.
 
 function fetchPikachu()
 fetch("http://pokeapi.co/api/v2/pokemon/pikachu")

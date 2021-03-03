@@ -1,20 +1,29 @@
 import "./components.css";
 import React from "react";
+import { addCatch, deleteCatch } from "../redux/actions";
+import { connect } from "react-redux";
 
-function DisplayPage(props, pkmn) {
-  console.log(props);
+const DisplayPage = ({ pkmn, isCaught, addCatch, deleteCatch }) => {
   return (
     <>
       <h1>Results</h1>
       <div className="box">
-        <h3>{props.name}</h3>
-        <div className="pokedex-box">Pokedex No. {props.id}</div>
-        <img src={props.img} />
-        <div className="type-box">{props.type}</div>
+        <h3>{pkmn.name}</h3>
+        <div className="pokedex-box">Pokedex No. {pkmn.id}</div>
+        <img src={pkmn.scuba} />
+        <div className="type-box">
+          {pkmn.type}
+          {/* {props.typetwo} */}
+        </div>
         {/* <div>{props.ptype}</div> */}
       </div>
+      {/* <button>Catch!</button> */}
+      {!isCaught && <button onClick={() => addCatch(pkmn)}> Catch</button>}
+      {isCaught && (
+        <button onClick={() => deleteCatch(pkmn.id)}> Release</button>
+      )}
     </>
   );
-}
+};
 
 export default DisplayPage;
