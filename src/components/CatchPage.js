@@ -7,14 +7,14 @@ import DisplayPage from "./DisplayPage";
 function CatchPage(props) {
   return (
     <>
-      <h1>Caught</h1>
+      <h1>Box</h1>
       {/* selected pokemon will be added here */}
       {props.caught.map((v) => (
         <DisplayPage
           key={v.id}
           pkmn={v}
-          isCatch={true}
-          deleteCaught={props.deleteCatch}
+          isCaught={true}
+          deleteCatch={props.deleteCatch}
         />
       ))}
     </>

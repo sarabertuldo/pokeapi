@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 const DisplayPage = ({ pkmn, isCaught, addCatch, deleteCatch }) => {
   return (
     <>
-      <h1>Results</h1>
+      {/* <h1>Results</h1> */}
       <div className="box">
         <h3>{pkmn.name}</h3>
         <div className="pokedex-box">Pokedex No. {pkmn.id}</div>

@@ -17,8 +17,8 @@ function SearchPage(props) {
   // const pkmn = useContext(PokeContext);
 
   useEffect(() => {
-    let caught = props.caught.map((pkmn) => pkmn.id);
-    setCaught(caught);
+    let ids = props.caught.map((pkmn) => pkmn.id);
+    setCaught(ids);
   }, [props.caught]);
 
   const url = `https://pokeapi.co/api/v2/`;
@@ -48,7 +48,8 @@ function SearchPage(props) {
   async function getByType(type) {
     try {
       setError("");
-      let response = await fetch(`${url}type/${type}`);
+      let typeLC = type.toLowerCase();
+      let response = await fetch(`${url}type/${typeLC}`);
       let json = await response.json();
       // console.log(json);
       let resPokeTypes = json.pokemon.map((pokemon) => {
@@ -98,7 +99,7 @@ function SearchPage(props) {
 
       <div>
         {error.length > 0 && <h1>{error}</h1>}
-        {error.length === 0 && (
+        {error.length === 0 && props.pkmn.name && (
           <DisplayPage
             pkmn={props.pkmn}
             id={props.pkmn.id}

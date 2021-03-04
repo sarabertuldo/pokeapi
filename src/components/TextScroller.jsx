@@ -16,7 +16,7 @@ function TextScroller ({text}) {
 
   return (
     
-    <div key={key}>
+    <div className="scroll-text" key={key}>
       <animated.div style={scrolling}>{text}</animated.div>
     </div>
   )

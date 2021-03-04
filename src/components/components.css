@@ -17,6 +17,10 @@ button {
   margin-left: 5px;
 }
 
+.scroll-text {
+  overflow-y: hidden;
+}
+
 h3 {
   text-transform: uppercase;
   margin-left: 5px;
