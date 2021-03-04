@@ -17,8 +17,8 @@ function SearchPage(props) {
   // const pkmn = useContext(PokeContext);
 
   useEffect(() => {
-    let ids = props.caught.map((pkmn) => pkmn.id);
-    setCaught(ids);
+    let caught = props.caught.map((pkmn) => pkmn.id);
+    setCaught(caught);
   }, [props.caught]);
 
   const url = `https://pokeapi.co/api/v2/`;
@@ -121,12 +121,6 @@ function SearchPage(props) {
       </div>
     </>
   );
-}
-
-{
-  /* {pokemonInfo && <div>Name: pokemonInfo.name</div>
-<div>PokeDex #: pokemonInfo.id</div>}
-<div>official-artwork</div> */
 }
 
 const mapDispatchToProps = {

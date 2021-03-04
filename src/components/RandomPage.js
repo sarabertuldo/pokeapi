@@ -26,7 +26,7 @@ function RandomPage() {
 
   return (
     <>
-      <h1>Random</h1>
+      <h1>Random Encounter</h1>
       <div className="random-box">
         <h3>{randomPkmn.name}</h3>
         <h4>#{randomPkmn.id}</h4>
