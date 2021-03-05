@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useMemo, useContext } from "react";
 import "./components.css";
 import DisplayPage from "./DisplayPage";
 import DisplayTypes from "./DisplayTypes";
@@ -6,6 +6,7 @@ import { PokeContext } from "../shared/PokeContext";
 import { setQuery } from "../redux/actions/QueryActions";
 import { setTypes } from "../redux/actions/TypesActions";
 import { connect } from "react-redux";
+import { addCatch, deleteCatch } from "../redux/actions";
 import axios from "axios";
 
 function SearchPage(props) {
@@ -16,9 +17,13 @@ function SearchPage(props) {
 
   // const pkmn = useContext(PokeContext);
 
-  useEffect(() => {
-    let ids = props.caught.map((pkmn) => pkmn.id);
-    setCaught(ids);
+  // useEffect(() => {
+  //   let ids = props.caught.map((pkmn) => pkmn.id);
+  //   setCaught(ids);
+  // }, [props.caught]);
+
+  const favePkmn = useMemo(() => {
+    return props.caught.map((pkmn) => pkmn.dex);
   }, [props.caught]);
 
   const url = `https://pokeapi.co/api/v2/`;
@@ -31,7 +36,7 @@ function SearchPage(props) {
       let json = await response.json();
 
       let resPkmn = {
-        id: json.id,
+        dex: json.id,
         name: json.name,
         img: json.sprites.front_default,
         type: json.types[0].type.name,
@@ -102,10 +107,12 @@ function SearchPage(props) {
         {error.length === 0 && props.pkmn.name && (
           <DisplayPage
             pkmn={props.pkmn}
-            id={props.pkmn.id}
+            dex={props.pkmn.dex}
             img={props.pkmn.img}
             type={props.pkmn.type}
-            isCaught={caught.includes(props.pkmn.id)}
+            isCaught={favePkmn.includes(props.pkmn.id)}
+            deleteCatch={props.deleteCatch}
+            addCatch={props.addCatch}
             // typetwo={props.pkmn.typetwo}
             // ptype={props.ptype.name}
           />
@@ -127,6 +134,8 @@ function SearchPage(props) {
 const mapDispatchToProps = {
   setQuery,
   setTypes,
+  addCatch,
+  deleteCatch,
 };
 
 function mapStateToProps(state) {

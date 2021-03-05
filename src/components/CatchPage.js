@@ -4,7 +4,7 @@ import { addCatch, deleteCatch } from "../redux/actions";
 import { connect } from "react-redux";
 import DisplayPage from "./DisplayPage";
 
-function CatchPage(props) {
+const CatchPage = (props) => {
   return (
     <>
       <h1>Box</h1>
@@ -19,7 +19,7 @@ function CatchPage(props) {
       ))}
     </>
   );
-}
+};
 
 const mapDispatchToProps = {
   addCatch,

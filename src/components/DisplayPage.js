@@ -1,6 +1,6 @@
 import "./components.css";
 import React from "react";
-import { addCatch, deleteCatch } from "../redux/actions";
+
 import { connect } from "react-redux";
 
 const DisplayPage = ({ pkmn, isCaught, addCatch, deleteCatch }) => {
@@ -9,7 +9,7 @@ const DisplayPage = ({ pkmn, isCaught, addCatch, deleteCatch }) => {
       {/* <h1>Results</h1> */}
       <div className="box">
         <h3>{pkmn.name}</h3>
-        <div className="pokedex-box">Pokedex No. {pkmn.id}</div>
+        <div className="pokedex-box">Pokedex No. {pkmn.dex}</div>
         <img src={pkmn.img} />
         <div className="type-box">
           {pkmn.type}
@@ -26,18 +26,4 @@ const DisplayPage = ({ pkmn, isCaught, addCatch, deleteCatch }) => {
   );
 };
 
-const mapDispatchToProps = {
-  addCatch,
-  deleteCatch,
-};
-
-function mapStateToProps(state) {
-  return {
-    globalState: state,
-    pkmn: state.query,
-    types: state.types,
-    caught: state.caught,
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(DisplayPage);
+export default DisplayPage;
