@@ -11,7 +11,7 @@ const CatchPage = (props) => {
       {/* selected pokemon will be added here */}
       {props.caught.map((v) => (
         <DisplayPage
-          key={v.id}
+          key={v.dex}
           pkmn={v}
           isCaught={true}
           deleteCatch={props.deleteCatch}

@@ -20,7 +20,7 @@ const DisplayPage = ({ pkmn, isCaught, addCatch, deleteCatch }) => {
       {/* <button>Catch!</button> */}
       {!isCaught && <button onClick={() => addCatch(pkmn)}> Catch</button>}
       {isCaught && (
-        <button onClick={() => deleteCatch(pkmn.id)}> Release</button>
+        <button onClick={() => deleteCatch(pkmn.dex)}> Release</button>
       )}
     </>
   );
