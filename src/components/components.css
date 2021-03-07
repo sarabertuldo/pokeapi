@@ -36,6 +36,12 @@ h3 {
   background-color: orange;
 }
 
+.results-box {
+  display: inline-block;
+  margin: auto;
+  padding: 10px;
+}
+
 .type-box {
   background-color: black;
   color: white;
