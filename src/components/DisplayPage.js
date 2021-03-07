@@ -1,6 +1,6 @@
 import "./components.css";
 import React from "react";
-
+import { connect } from "react-redux";
 const DisplayPage = ({ pkmn, isCaught, addCatch, deleteCatch }) => {
   return (
     <>
@@ -12,6 +12,7 @@ const DisplayPage = ({ pkmn, isCaught, addCatch, deleteCatch }) => {
           <img src={pkmn.img} />
           <div className="type-box">{pkmn.type}</div>
         </div>
+
         {!isCaught && <button onClick={() => addCatch(pkmn)}> Catch</button>}
         {isCaught && (
           <button onClick={() => deleteCatch(pkmn.dex)}> Release</button>
@@ -20,5 +21,4 @@ const DisplayPage = ({ pkmn, isCaught, addCatch, deleteCatch }) => {
     </>
   );
 };
-
 export default DisplayPage;

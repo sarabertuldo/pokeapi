@@ -112,6 +112,7 @@ function SearchPage(props) {
             type={props.pkmn.type}
             isCaught={favePkmn.includes(props.pkmn.id)}
             deleteCatch={props.deleteCatch}
+            addCatch={props.addCatch}
           />
         )}
       </div>
