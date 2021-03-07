@@ -56,9 +56,8 @@ function SearchPage(props) {
       let typeLC = type.toLowerCase();
       let response = await fetch(`${url}type/${typeLC}`);
       let json = await response.json();
-      // console.log(json);
       let resPokeTypes = json.pokemon.map((pokemon) => {
-        return { name: pokemon.pokemon.name };
+        return { name: pokemon.pokemon.name, typeurl: pokemon.pokemon.url };
       });
       // let ptype = json.pokemon[0].pokemon.name;
       console.log(resPokeTypes);
@@ -120,7 +119,11 @@ function SearchPage(props) {
         {props.types.map((t) => {
           return (
             <div>
-              <DisplayTypes pkmn={t}></DisplayTypes>
+              <DisplayTypes
+                pkmn={t}
+                // name={props.types.name}
+                //
+              ></DisplayTypes>
             </div>
           );
         })}
