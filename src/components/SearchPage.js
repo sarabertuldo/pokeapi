@@ -56,8 +56,9 @@ function SearchPage(props) {
       let typeLC = type.toLowerCase();
       let response = await fetch(`${url}type/${typeLC}`);
       let json = await response.json();
+      // console.log(json);
       let resPokeTypes = json.pokemon.map((pokemon) => {
-        return { name: pokemon.pokemon.name, typeurl: pokemon.pokemon.url };
+        return { name: pokemon.pokemon.name };
       });
       // let ptype = json.pokemon[0].pokemon.name;
       console.log(resPokeTypes);
@@ -119,11 +120,7 @@ function SearchPage(props) {
         {props.types.map((t) => {
           return (
             <div>
-              <DisplayTypes
-                pkmn={t}
-                // name={props.types.name}
-                //
-              ></DisplayTypes>
+              <DisplayTypes pkmn={t}></DisplayTypes>
             </div>
           );
         })}
@@ -149,3 +146,21 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPage);
+// async function getTypeInfo(typeinfo){
+//   try {
+//     setError("");
+//     let tresponse = await fetch(`${typeurl}`)
+//     let tjson = await tresponse.tjson();
+//     let typePkmn = {
+//       dex: tjson.id,
+//       name: tjson.name,
+//       img: tjson.sprites.front_default,
+//       type: tjson.types[0].type.name,
+//     }}
+//     catch (e) {
+//       setError("Invalid type");
+//       props
+//     }
+//   }
+
+//

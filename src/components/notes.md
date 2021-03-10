@@ -188,3 +188,68 @@ getPkmn().then((data) => setPkmn(data));
 // {pokemonInfo && <div>Name: pokemonInfo.name</div>
 // <div>PokeDex #: pokemonInfo.id</div>}
 // <div>official-artwork</div>
+
+// async function getPkmnInfo(pkmninfo) {
+// try {
+// setError("");
+// let response = await fetch(`${props.pkmn.url}` / `${props.pkmn.name}`);
+// let json = await response.json();
+// let pkmninfo = {
+// dex: json.id,
+// name: json.name,
+// img: json.sprites.front_default,
+// type: json.types[0].type.name,
+// };
+// console.log(pkmninfo);
+// props.getPkmnInfo(pkmninfo);
+// } catch (e) {
+// setError("Invalid type");
+// props.getPkmnInfo([]);
+// }
+// }
+
+async function getPkmnInfo(pkmninfo) {
+try {
+setError("");
+let response = await fetch(`${pokemon.pokemon.url}`);
+let json = await response.json();
+let typeInfo = {
+dex: json.id,
+name: json.name,
+img: json.sprites.front_default,
+type: json.types[0].type.name,
+};
+console.log(pkmninfo);
+props.getPkmnInfo(pkmninfo);
+} catch (e) {
+setError("Invalid type");
+props.getPkmnInfo([]);
+}
+}
+
+import { FirebaseAppProvider } from "reactfire";
+
+FireBase Google
+Project Overview
+Add web app
+
+- will take you to project settings
+
+Go to Firebase SDK snippet, click config
+copy and paste into the index.js
+
+ReactDOM.render(
+<React.StrictMode>
+<FirebaseAppProvider firebaseConfig={firebaseConfig}>
+)
+
+App.js
+import firebase from "firebase/app"
+import auth from "firebase/auth"
+import { useUser, useAuth } from "reactfire";
+
+functionApp() {
+const auth = useAuth();
+const { data: user } = useUser();
+function login() {}
+}

@@ -15,6 +15,7 @@
     "react-scripts": "4.0.2",
     "react-spring": "^8.0.27",
     "redux": "^4.0.5",
+    "use-redux": "^2.2.1",
     "web-vitals": "^1.1.0"
   },
   "scripts": {
