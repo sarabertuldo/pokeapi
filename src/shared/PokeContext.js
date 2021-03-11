@@ -1,6 +1,4 @@
 import React from "react";
-import { useArray } from "../hooks/useArray";
-// import { initialState } from "react";
 
 export const initialState = {
   favorites: [],
