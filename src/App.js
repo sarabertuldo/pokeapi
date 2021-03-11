@@ -57,7 +57,7 @@ function App() {
   // if not, no action required
   // if it does, you'll get a response with a username and then log that into state
   return (
-    <PokeContext.PokeProvider value={[globalState, setGlobalState]}>
+    <PokeContext.Provider value={[globalState, setGlobalState]}>
       <Router>
         <>
           <nav className="navbar">
@@ -101,13 +101,13 @@ function App() {
                 />
                 <ProtectedRoute
                   isAuth={isAuth}
-                  authRequired={false}
+                  authRequired={true}
                   path="/search"
                   component={SearchPage}
                 />
                 <ProtectedRoute
                   isAuth={isAuth}
-                  authRequired={false}
+                  authRequired={true}
                   path="/catch"
                   component={CatchPage}
                 />
@@ -127,7 +127,9 @@ function App() {
                   <Redirect to="/search" />
                 </Route>
               </Switch>
-              <button onClick={() => logout()}>Logout</button>
+              <div className="button-logout">
+                <button onClick={() => logout()}>Logout</button>
+              </div>
             </div>
           </main>
           <footer className="f-text">
@@ -136,7 +138,7 @@ function App() {
           </footer>
         </>
       </Router>
-    </PokeContext.PokeProvider>
+    </PokeContext.Provider>
   );
 }
 

@@ -8,7 +8,6 @@ const CatchPage = (props) => {
   return (
     <>
       <h1>Box</h1>
-      {/* selected pokemon will be added here */}
       {props.caught.map((v) => (
         <DisplayPage
           key={v.dex}

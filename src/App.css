@@ -22,3 +22,8 @@ footer {
   color: white;
   margin-bottom: 10px;
 }
+
+.button-logout {
+  text-align: right;
+  padding: 5px;
+}

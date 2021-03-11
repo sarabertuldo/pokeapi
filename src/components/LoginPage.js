@@ -3,6 +3,7 @@ import "./components.css";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { setUser } from "../redux/actions";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 const LoginPage = (props) => {
@@ -86,7 +87,7 @@ const LoginPage = (props) => {
         </h3>
       )}
       <p>
-        Create an account <u>here</u>.
+        Create an account <Link to="/signup">here</Link>.
       </p>
     </>
   );
