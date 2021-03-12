@@ -63,6 +63,22 @@ function SearchPage(props) {
       // let ptype = json.pokemon[0].pokemon.name;
       console.log(resPokeTypes);
       props.setTypes(resPokeTypes);
+      async function getTypeInfo(typeinfo) {
+        try {
+          setError("");
+          let tresponse = await fetch(`${typeurl}`);
+          let tjson = await tresponse.tjson();
+          let typePkmn = {
+            dex: tjson.id,
+            name: tjson.name,
+            img: tjson.sprites.front_default,
+            type: tjson.types[0].type.name,
+          };
+        } catch (e) {
+          setError("Invalid type");
+          props;
+        }
+      }
     } catch (e) {
       setError("Invalid type");
       props.setTypes([]);
