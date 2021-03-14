@@ -1,49 +1,47 @@
 import "./components.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import DisplayPage from "./DisplayPage";
 
-function DisplayTypes({ props, types, isCaught, addCatch, deleteCatch }) {
+function DisplayTypes(props) {
   console.log(props);
   const [error, setError] = useState("");
+  const [pokemon, setPokemon] = useState({});
 
-  // async function getPkmnInfo(pkmninfo) {
-  //   try {
-  //     setError("");
-  //     let response = await fetch(`${props.pkmn.typeurl}`);
-  //     let json = await response.json();
-  //     let typeInfo = {
-  //       dex: json.id,
-  //       name: json.name,
-  //       img: json.sprites.front_default,
-  //       type: json.types[0].type.name,
-  //     };
-  //     console.log(pkmninfo);
-  //     props.getPkmnInfo(pkmninfo);
-  //   } catch (e) {
-  //     setError("Invalid type");
-  //     props.getPkmnInfo([]);
-  //   }
-  // }
+  useEffect(() => {
+    getData();
+  }, [props.pkmn.url]);
+  async function getData() {
+    try {
+      setError("");
+      let response = await fetch(props.pkmn.url);
+      let json = await response.json();
+
+      let resPkmn = {
+        dex: json.id,
+        name: json.name,
+        img: json.sprites.front_default,
+        type: json.types[0].type.name,
+      };
+      setPokemon(resPkmn);
+    } catch (e) {
+      setError("Invalid name");
+      setPokemon([]);
+    }
+  }
 
   return (
     <>
       <div>
         <h3>{props.pkmn.name}</h3>
         {props.pkmn.typeurl}
-        {/* {typeInfo.dex} */}
-
-        {/* <div className="results-box">
-        <div className="box">
-          <h3>{pkmn.name}</h3>
-          <div className="pokedex-box">Pokedex No. {pkmn.dex}</div>
-          <img src={pkmn.img} />
-          <div className="type-box ">{pkmn.type}</div>
-        </div>
-
-        {!isCaught && <button onClick={() => addCatch(pkmn)}> Catch</button>}
-        {isCaught && (
-          <button onClick={() => deleteCatch(pkmn.dex)}> Release</button>
+        {error.length === 0 && pokemon.name && (
+          <DisplayPage
+            pkmn={pokemon}
+            isCaught={props.isCaught}
+            deleteCatch={props.deleteCatch}
+            addCatch={props.addCatch}
+          />
         )}
-      </div> */}
       </div>
     </>
   );

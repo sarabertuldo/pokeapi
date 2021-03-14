@@ -1,3 +1,5 @@
+import axios from "axios";
+
 async function login(username, password) {
   try {
     let res = await fetch("...");
@@ -50,3 +52,30 @@ async function getByType(type) {
     props.setTypes([]);
   }
 }
+
+// async function pullData (id, name) {
+//     // {success: boolean, data: null | Array, error: null | string }
+//     // GET
+//     let res = await fetch(`example.com/id=${id}&name=${name}`);
+//     let json = await res.json();
+//     // AXIOS
+//     let res = await axios.get(`example.com/id=${id}&name=${name}`);
+//     let json = res.formData;
+// transformResponse:
+// if (json.success)
+
+//     // POST
+//     let res = await fetch("example.com", {
+//         method: "POST",
+//         header: { "Content-Type": "application/json", }
+//     },
+//     body: JSON.stringify({id: id, name: name})
+//     // JSON has to be capitalized and it's a JS keyword
+// })
+// let json = await res.json();
+//     if (json.success) {
+//         // DO SOMETHING
+//     }
+// }
+
+// npm i axios
