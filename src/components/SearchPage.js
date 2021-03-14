@@ -2,12 +2,10 @@ import React, { useState, useMemo, useContext } from "react";
 import "./components.css";
 import DisplayPage from "./DisplayPage";
 import DisplayTypes from "./DisplayTypes";
-import { PokeContext } from "../shared/PokeContext";
 import { setQuery } from "../redux/actions/QueryActions";
 import { setTypes } from "../redux/actions/TypesActions";
 import { connect } from "react-redux";
 import { addCatch, deleteCatch } from "../redux/actions";
-import axios from "axios";
 
 function SearchPage(props) {
   const [name, setName] = useState("");
@@ -15,15 +13,8 @@ function SearchPage(props) {
   const [error, setError] = useState("");
   const [caught, setCaught] = useState([]);
 
-  // const pkmn = useContext(PokeContext);
-
-  // useEffect(() => {
-  //   let ids = props.caught.map((pkmn) => pkmn.id);
-  //   setCaught(ids);
-  // }, [props.caught]);
-
   const favePkmn = useMemo(() => {
-    return props.caught.map((pkmn) => pkmn.dex);
+    return props.caught.map((pkmn) => pkmn.name);
   }, [props.caught]);
 
   const url = `https://pokeapi.co/api/v2/`;
@@ -40,9 +31,7 @@ function SearchPage(props) {
         name: json.name,
         img: json.sprites.front_default,
         type: json.types[0].type.name,
-        // typetwo: json.types[1].type.name,
       };
-      // let type = resPkmn.json.types.map((type) => type.type.name);
       props.setQuery(resPkmn);
     } catch (e) {
       setError("Invalid name");
@@ -56,29 +45,11 @@ function SearchPage(props) {
       let typeLC = type.toLowerCase();
       let response = await fetch(`${url}type/${typeLC}`);
       let json = await response.json();
-      // console.log(json);
       let resPokeTypes = json.pokemon.map((pokemon) => {
         return { name: pokemon.pokemon.name };
       });
-      // let ptype = json.pokemon[0].pokemon.name;
       console.log(resPokeTypes);
       props.setTypes(resPokeTypes);
-      async function getTypeInfo(typeinfo) {
-        try {
-          setError("");
-          let tresponse = await fetch(`${typeurl}`);
-          let tjson = await tresponse.tjson();
-          let typePkmn = {
-            dex: tjson.id,
-            name: tjson.name,
-            img: tjson.sprites.front_default,
-            type: tjson.types[0].type.name,
-          };
-        } catch (e) {
-          setError("Invalid type");
-          props;
-        }
-      }
     } catch (e) {
       setError("Invalid type");
       props.setTypes([]);
@@ -126,17 +97,22 @@ function SearchPage(props) {
             dex={props.pkmn.dex}
             img={props.pkmn.img}
             type={props.pkmn.type}
-            isCaught={favePkmn.includes(props.pkmn.id)}
+            isCaught={favePkmn.includes(props.pkmn.name)}
             deleteCatch={props.deleteCatch}
             addCatch={props.addCatch}
           />
         )}
       </div>
-      <div>
+      <div className="results-box">
         {props.types.map((t) => {
           return (
             <div>
-              <DisplayTypes pkmn={t}></DisplayTypes>
+              <DisplayTypes
+                pkmn={t}
+                isCaught={favePkmn.includes(t.name)}
+                deleteCatch={props.deleteCatch}
+                addCatch={props.addCatch}
+              ></DisplayTypes>
             </div>
           );
         })}
@@ -162,21 +138,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPage);
-// async function getTypeInfo(typeinfo){
-//   try {
-//     setError("");
-//     let tresponse = await fetch(`${typeurl}`)
-//     let tjson = await tresponse.tjson();
-//     let typePkmn = {
-//       dex: tjson.id,
-//       name: tjson.name,
-//       img: tjson.sprites.front_default,
-//       type: tjson.types[0].type.name,
-//     }}
-//     catch (e) {
-//       setError("Invalid type");
-//       props
-//     }
-//   }
-
-//
